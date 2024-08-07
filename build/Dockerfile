@@ -7,6 +7,14 @@ LABEL org.opencontainers.image.source https://github.com/ai-dock/comfyui
 LABEL org.opencontainers.image.description "ComfyUI Stable Diffusion backend and GUI"
 LABEL maintainer="Rob Ballantyne <rob@dynamedia.uk>"
 
+ENV NVIDIA_VISIBLE_DEVICES all
+ENV NVIDIA_DRIVER_CAPABILITIES compute,utility,graphics
+
+# Default pyopengl to EGL for good headless rendering support
+ENV PYOPENGL_PLATFORM egl
+
+COPY docker/10_nvidia.json /usr/share/glvnd/egl_vendor.d/10_nvidia.json
+
 ENV COMFYUI_VENV=$VENV_DIR/comfyui
 ENV COMFYUI_VENV_PYTHON=$COMFYUI_VENV/bin/python
 ENV COMFYUI_VENV_PIP=$COMFYUI_VENV/bin/pip

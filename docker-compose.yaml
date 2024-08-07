@@ -6,13 +6,13 @@ services:
     build:
       context: ./build
       args:
-        PYTHON_VERSION: ${PYTHON_VERSION:-3.10}
+        PYTHON_VERSION: ${PYTHON_VERSION:-3.11}
         PYTORCH_VERSION: ${PYTORCH_VERSION:-2.3.0}
         COMFYUI_SHA: ${COMFYUI_SHA:-}
         # Base on Python image which is base + python + jupyter
         IMAGE_BASE: ${IMAGE_BASE:-ghcr.io/ai-dock/python:${PYTHON_VERSION:-3.10}-v2-cuda-12.1.1-base-22.04}
       tags:
-        - "ghcr.io/ai-dock/comfyui:${IMAGE_TAG:-pytorch-${PYTORCH_VERSION:-2.3.0}-py3.10-cuda-12.1.1-base-22.04}"
+        - "${COMPOSE_PROJECT_NAME:-ghcr.io/ai-dock/comfyui}:${IMAGE_TAG:-pytorch-${PYTORCH_VERSION:-2.3.0}-py3.10-cuda-12.1.1-base-22.04}"
         
     image: ghcr.io/ai-dock/comfyui:${IMAGE_TAG:-pytorch-${PYTORCH_VERSION:-2.3.0}-py3.10-cuda-12.1.1-base-22.04}
     
@@ -43,15 +43,35 @@ services:
       - ./config/provisioning/default.sh:/opt/ai-dock/bin/provisioning.sh
       # In-container development
       - ./build/COPY_ROOT_1/opt/ai-dock/api-wrapper:/opt/ai-dock/api-wrapper
+
+      # Config for ComfyUI Plugin Checkpoints
+      - ./config/provisioning/config.json:/opt/ai-dock/bin/build/layer0/config.json
+
+      # Extra nodes for ComfyUI
+      - ./extra_nodes/:/opt/ai-dock/bin/extra_nodes/:ro
+
+      # Mount models (optional)
+      - ${MODEL_BASE_PATH}/Stable-diffusion:/opt/storage/stable_diffusion/models/ckpt:ro
+      - ${MODEL_BASE_PATH}/CLIP:/opt/storage/stable_diffusion/models/clip:ro
+      - ${MODEL_BASE_PATH}/clip_vision:/opt/storage/stable_diffusion/models/clip_vision:ro
+      - ${MODEL_BASE_PATH}/ControlNet:/opt/storage/stable_diffusion/models/controlnet:ro
+      - ${MODEL_BASE_PATH}/embeddings:/opt/storage/stable_diffusion/models/embeddings:ro
+      - ${MODEL_BASE_PATH}/facerestore_models:/opt/storage/stable_diffusion/models/facerestore:ro
+      - ${MODEL_BASE_PATH}/ESRGAN:/opt/storage/stable_diffusion/models/esrgan:ro
+      - ${MODEL_BASE_PATH}/Lora:/opt/storage/stable_diffusion/models/lora:ro
+      - ${MODEL_BASE_PATH}/unet:/opt/storage/stable_diffusion/models/unet:ro
+      - ${MODEL_BASE_PATH}/VAE:/opt/storage/stable_diffusion/models/vae:ro
+      - ${MODEL_BASE_PATH}/stablesr:/opt/storage/stable_diffusion/models/stablesr:ro
+      - ${MODEL_BASE_PATH}/comfy3dpack:/opt/storage/stable_diffusion/models/comfy3dpack:ro           
     ports:
         # SSH available on host machine port 2222 to avoid conflict. Change to suit
         - ${SSH_PORT_HOST:-2222}:22
         # Caddy port for service portal
         - ${SERVICEPORTAL_PORT_HOST:-1111}:${SERVICEPORTAL_PORT_HOST:-1111}
         # ComfyUI web interface
-        - ${COMFYUI_PORT_HOST:-8288}:${COMFYUI_PORT_HOST:-8188}
+        - ${COMFYUI_PORT_HOST:-8188}:${COMFYUI_PORT_HOST:-8188}
         # Jupyter server
-        - ${JUPYTER_PORT_HOST:-8448}:${JUPYTER_PORT_HOST:-8888}
+        - ${JUPYTER_PORT_HOST:-8888}:${JUPYTER_PORT_HOST:-8888}
         # Syncthing
         - ${SYNCTHING_UI_PORT_HOST:-8384}:${SYNCTHING_UI_PORT_HOST:-8384}
         - ${SYNCTHING_TRANSPORT_PORT_HOST:-22999}:${SYNCTHING_TRANSPORT_PORT_HOST:-22999}
@@ -86,4 +106,4 @@ services:
         - SYNCTHING_UI_PORT_HOST=${SYNCTHING_UI_PORT_HOST:-8384}
         - SYNCTHING_TRANSPORT_PORT_HOST=${SYNCTHING_TRANSPORT_PORT_HOST:-22999}
         - SYNCTHING_URL=${SYNCTHING_URL:-}
-        #- PROVISIONING_SCRIPT=${PROVISIONING_SCRIPT:-}
+        #- PROVISIONING_SCRIPT=${PROVISIONING_SCRIPT-provisioning.sh}
