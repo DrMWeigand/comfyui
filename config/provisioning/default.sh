@@ -10,6 +10,8 @@
 
 CONFIG_JSON="/opt/ai-dock/bin/build/layer0/config.json"
 
+#DEFAULT_WORKFLOW="https://..."
+
 APT_PACKAGES=(
     #"package-1"
     #"package-2"
@@ -264,6 +266,14 @@ function provisioning_get_default_workflow() {
         fi
     fi
 }
+function provisioning_get_default_workflow() {
+    if [[ -n $DEFAULT_WORKFLOW ]]; then
+        workflow_json=$(curl -s "$DEFAULT_WORKFLOW")
+        if [[ -n $workflow_json ]]; then
+            echo "export const defaultGraph = $workflow_json;" > /opt/ComfyUI/web/scripts/defaultGraph.js
+        fi
+    fi
+}
 
 function provisioning_get_models() {
     if [[ -z $2 ]]; then return 1; fi
@@ -294,6 +304,38 @@ function provisioning_print_header() {
 
 function provisioning_print_end() {
     printf "\nProvisioning complete:  Web UI will start now\n\n"
+}
+
+function provisioning_has_valid_hf_token() {
+    [[ -n "$HF_TOKEN" ]] || return 1
+    url="https://huggingface.co/api/whoami-v2"
+
+    response=$(curl -o /dev/null -s -w "%{http_code}" -X GET "$url" \
+        -H "Authorization: Bearer $HF_TOKEN" \
+        -H "Content-Type: application/json")
+
+    # Check if the token is valid
+    if [ "$response" -eq 200 ]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+function provisioning_has_valid_civitai_token() {
+    [[ -n "$CIVITAI_TOKEN" ]] || return 1
+    url="https://civitai.com/api/v1/models?hidden=1&limit=1"
+
+    response=$(curl -o /dev/null -s -w "%{http_code}" -X GET "$url" \
+        -H "Authorization: Bearer $HF_TOKEN" \
+        -H "Content-Type: application/json")
+
+    # Check if the token is valid
+    if [ "$response" -eq 200 ]; then
+        return 0
+    else
+        return 1
+    fi
 }
 
 function provisioning_has_valid_hf_token() {
