@@ -17,13 +17,13 @@ services:
     image: ghcr.io/ai-dock/comfyui:${IMAGE_TAG:-pytorch-${PYTORCH_VERSION:-2.3.0}-py3.10-cuda-12.1.1-base-22.04}
     
     ## For Nvidia GPU's - You probably want to uncomment this
-    #deploy:
-    #  resources:
-    #    reservations:
-    #      devices:
-    #        - driver: nvidia
-    #          count: all
-    #          capabilities: [gpu]
+    deploy:
+     resources:
+       reservations:
+         devices:
+           - driver: nvidia
+             count: all
+             capabilities: [gpu]
     
     devices:
       - "/dev/dri:/dev/dri"
@@ -49,9 +49,9 @@ services:
         # Caddy port for service portal
         - ${SERVICEPORTAL_PORT_HOST:-1111}:${SERVICEPORTAL_PORT_HOST:-1111}
         # ComfyUI web interface
-        - ${COMFYUI_PORT_HOST:-8188}:${COMFYUI_PORT_HOST:-8188}
+        - ${COMFYUI_PORT_HOST:-8288}:${COMFYUI_PORT_HOST:-8188}
         # Jupyter server
-        - ${JUPYTER_PORT_HOST:-8888}:${JUPYTER_PORT_HOST:-8888}
+        - ${JUPYTER_PORT_HOST:-8448}:${JUPYTER_PORT_HOST:-8888}
         # Syncthing
         - ${SYNCTHING_UI_PORT_HOST:-8384}:${SYNCTHING_UI_PORT_HOST:-8384}
         - ${SYNCTHING_TRANSPORT_PORT_HOST:-22999}:${SYNCTHING_TRANSPORT_PORT_HOST:-22999}
@@ -64,7 +64,7 @@ services:
         - WORKSPACE=${WORKSPACE:-/workspace}
         - WORKSPACE_SYNC=${WORKSPACE_SYNC:-false}
         - CF_TUNNEL_TOKEN=${CF_TUNNEL_TOKEN:-}
-        - CF_QUICK_TUNNELS=${CF_QUICK_TUNNELS:-true}
+        - CF_QUICK_TUNNELS=${CF_QUICK_TUNNELS:-false}
         - CIVITAI_TOKEN=${CIVITAI_TOKEN:-}
         - HF_TOKEN=${HF_TOKEN:-}
         - WEB_ENABLE_AUTH=${WEB_ENABLE_AUTH:-true}
