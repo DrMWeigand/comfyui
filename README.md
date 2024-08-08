@@ -2,6 +2,114 @@
 
 # AI-Dock + ComfyUI Docker Image
 
+This project enables you to run [ComfyUI](https://github.com/comfyanonymous/ComfyUI) within a highly-configurable, cloud-first AI-Dock container with several powerful enhancements tailored for more efficient usage.
+
+## New Features and Enhancements
+
+### 1. Build Support for Custom Comfy3D Pack
+Customized to build the **Comfy3D Pack** for generating 3D models from Stable Diffusion outputs.
+
+### 2. Snapshots for Custom Node Versions
+Control versions of custom nodes via a JSON file in the **snapshot format**.
+
+### 3. Install Custom Nodes from Local Directory
+Install custom nodes from a **local directory** to simplify dependency management.
+
+### 4. Install Prebuilt Wheels
+Install prebuilt wheels to optimize build times and enhance dependency resolution.
+
+### 5. Use Local Models via Volume Definitions
+Utilize models stored locally by defining volume mappings in the `docker-compose.yaml` file.
+
+## Configuration Steps
+
+### 1. Folder Mappings for Local Deployments
+
+Define folder mappings in `config/provisioning/default.sh`:
+
+```bash
+declare -A storage_map
+storage_map["stable_diffusion/models/ckpt"]="/opt/ComfyUI/models/checkpoints"
+# Add other mappings as needed
+```
+
+Ensure volume mappings are included in the docker-compose.yml:
+
+```yaml
+volumes:
+  - ${MODEL_BASE_PATH}/Stable-diffusion:/opt/storage/stable_diffusion/models/ckpt:ro
+  # Add other mappings as needed
+```
+
+Set `MODEL_BASE_PATH` in `.env`
+
+```env
+MODEL_BASE_PATH=/path/to/your/models/
+```
+
+Got it! Here’s the revised and concise configuration documentation, focusing on the correct methods to install custom nodes, prebuilt wheels, pip packages, and system applications as specified in your `default.sh` script.
+
+---
+
+## Configuration Steps
+
+### Adding Custom Nodes
+
+Update the `NODES` array in `config/provisioning/default.sh`:
+
+```bash
+NODES=(
+    "https://github.com/ltdrdata/ComfyUI-Manager"
+    # Add more node repositories as needed
+)
+```
+
+### Installing Prebuilt Wheels
+
+Add prebuilt wheels in the `PIP_PACKAGES` array in `config/provisioning/default.sh`:
+
+```bash
+WHEEL_PATHS=(
+    "path/to/prebuilt_wheel1.whl"
+    "path/to/prebuilt_wheel2.whl"
+    # Add more prebuilt wheels as needed
+)
+```
+
+### Installing Custom Pip Packages
+
+Include custom pip packages in the `PIP_PACKAGES` array:
+
+```bash
+PIP_PACKAGES=(
+    "package-1"
+    "package-2"
+    # Add more pip packages as needed
+)
+```
+
+### Installing Linux System Packages
+
+Specify the apps to be installed on the Linux system in the `APT_PACKAGES` array:
+
+```bash
+APT_PACKAGES=(
+    "package-1"
+    "package-2"
+    # Add more system packages as needed
+)
+```
+
+### 2. Manage Model Downloads for Cloud Deployments
+Specify model downloads in `build/COPY_ROOT_99/opt/ai-dock/bin/build/layer99/init.sh` if they should be integrated in the image (in `/config/provisioning/default.sh` if they should be downloaded during container deployment):
+
+```bash
+CHECKPOINT_MODELS=(
+    "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt"
+    # More models here...
+)
+```
+
 Run [ComfyUI](https://github.com/comfyanonymous/ComfyUI) in a highly-configurable, cloud-first AI-Dock container.
 
 >[!NOTE]

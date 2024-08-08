@@ -51,18 +51,18 @@ services:
       - ./extra_nodes/:/opt/ai-dock/bin/extra_nodes/:ro
 
       # Mount models (optional)
-      - ${MODEL_BASE_PATH}/Stable-diffusion:/opt/storage/stable_diffusion/models/ckpt:ro
-      - ${MODEL_BASE_PATH}/CLIP:/opt/storage/stable_diffusion/models/clip:ro
-      - ${MODEL_BASE_PATH}/clip_vision:/opt/storage/stable_diffusion/models/clip_vision:ro
-      - ${MODEL_BASE_PATH}/ControlNet:/opt/storage/stable_diffusion/models/controlnet:ro
-      - ${MODEL_BASE_PATH}/embeddings:/opt/storage/stable_diffusion/models/embeddings:ro
-      - ${MODEL_BASE_PATH}/facerestore_models:/opt/storage/stable_diffusion/models/facerestore:ro
-      - ${MODEL_BASE_PATH}/ESRGAN:/opt/storage/stable_diffusion/models/esrgan:ro
-      - ${MODEL_BASE_PATH}/Lora:/opt/storage/stable_diffusion/models/lora:ro
-      - ${MODEL_BASE_PATH}/unet:/opt/storage/stable_diffusion/models/unet:ro
-      - ${MODEL_BASE_PATH}/VAE:/opt/storage/stable_diffusion/models/vae:ro
-      - ${MODEL_BASE_PATH}/stablesr:/opt/storage/stable_diffusion/models/stablesr:ro
-      - ${MODEL_BASE_PATH}/comfy3dpack:/opt/storage/stable_diffusion/models/comfy3dpack:ro           
+      #- ${MODEL_BASE_PATH}/Stable-diffusion:/opt/storage/stable_diffusion/models/ckpt:ro
+      #- ${MODEL_BASE_PATH}/CLIP:/opt/storage/stable_diffusion/models/clip:ro
+      #- ${MODEL_BASE_PATH}/clip_vision:/opt/storage/stable_diffusion/models/clip_vision:ro
+      #- ${MODEL_BASE_PATH}/ControlNet:/opt/storage/stable_diffusion/models/controlnet:ro
+      #- ${MODEL_BASE_PATH}/embeddings:/opt/storage/stable_diffusion/models/embeddings:ro
+      #- ${MODEL_BASE_PATH}/facerestore_models:/opt/storage/stable_diffusion/models/facerestore:ro
+      #- ${MODEL_BASE_PATH}/ESRGAN:/opt/storage/stable_diffusion/models/esrgan:ro
+      #- ${MODEL_BASE_PATH}/Lora:/opt/storage/stable_diffusion/models/lora:ro
+      #- ${MODEL_BASE_PATH}/unet:/opt/storage/stable_diffusion/models/unet:ro
+      #- ${MODEL_BASE_PATH}/VAE:/opt/storage/stable_diffusion/models/vae:ro
+      #- ${MODEL_BASE_PATH}/stablesr:/opt/storage/stable_diffusion/models/stablesr:ro
+      #- ${MODEL_BASE_PATH}/comfy3dpack:/opt/storage/stable_diffusion/models/comfy3dpack:ro           
     ports:
         # SSH available on host machine port 2222 to avoid conflict. Change to suit
         - ${SSH_PORT_HOST:-2222}:22

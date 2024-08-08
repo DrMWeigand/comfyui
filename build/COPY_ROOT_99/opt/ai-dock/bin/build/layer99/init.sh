@@ -52,6 +52,9 @@ NODES=(
     "https://github.com/MrForExample/ComfyUI-3D-Pack"
     "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite"
     "https://github.com/john-mnz/ComfyUI-Inspyrenet-Rembg"
+    "https://github.com/kijai/ComfyUI-KJNodes"
+    "https://github.com/ltdrdata/ComfyUI-Inspire-Pack"
+    "https://github.com/edenartlab/eden_comfy_pipelines"
 )
 
 CHECKPOINT_MODELS=(
