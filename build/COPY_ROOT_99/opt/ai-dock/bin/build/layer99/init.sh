@@ -23,19 +23,12 @@ APT_PACKAGES=(
 
 # Packages are installed after nodes so we can fix them...
 PIP_PACKAGES=(
-    torch-scatter -f https://data.pyg.org/whl/torch-2.3.0+cu121.html
+    descript-audiotools
 #    "xformers"
 #    "rembg"
 )
 
 WHEEL_PATHS=(
-   "Comfy3D_Pre_Builds/_Build_Wheels/_Wheels_linux_py311_cu121/diff_gaussian_rasterization-0.0.0-cp311-cp311-linux_x86_64.whl"
-   "Comfy3D_Pre_Builds/_Build_Wheels/_Wheels_linux_py311_cu121/kiui-0.2.10-py3-none-any.whl"
-   "Comfy3D_Pre_Builds/_Build_Wheels/_Wheels_linux_py311_cu121/nvdiffrast-0.3.1-py3-none-any.whl"
-   "Comfy3D_Pre_Builds/_Build_Wheels/_Wheels_linux_py311_cu121/pointnet2_ops-3.0.0-cp311-cp311-linux_x86_64.whl"
-   "Comfy3D_Pre_Builds/_Build_Wheels/_Wheels_linux_py311_cu121/pointnet2_ops-3.0.0-cp311-cp311-linux_x86_64.whl"
-   "Comfy3D_Pre_Builds/_Build_Wheels/_Wheels_linux_py311_cu121/pytorch3d-0.7.7-cp311-cp311-linux_x86_64.whl"
-   "Comfy3D_Pre_Builds/_Build_Wheels/_Wheels_linux_py311_cu121/simple_knn-0.0.0-cp311-cp311-linux_x86_64.whl"
 )
 
 LOCAL_REPOS=(
@@ -45,16 +38,7 @@ LOCAL_REPOS=(
 
 NODES=(
     "https://github.com/ltdrdata/ComfyUI-Manager"
-    "https://github.com/WASasquatch/was-node-suite-comfyui"
-    "https://github.com/ltdrdata/ComfyUI-Impact-Pack"
-    "https://github.com/Jcd1230/rembg-comfyui-node"
-    "https://github.com/MrForExample/Comfy3D_Pre_Builds"    
-    "https://github.com/MrForExample/ComfyUI-3D-Pack"
-    "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite"
-    "https://github.com/john-mnz/ComfyUI-Inspyrenet-Rembg"
-    "https://github.com/kijai/ComfyUI-KJNodes"
-    "https://github.com/ltdrdata/ComfyUI-Inspire-Pack"
-    "https://github.com/edenartlab/eden_comfy_pipelines"
+    "https://github.com/smthemex/ComfyUI_ParlerTTS"
 )
 
 CHECKPOINT_MODELS=(
