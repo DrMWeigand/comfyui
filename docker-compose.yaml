@@ -51,18 +51,49 @@ services:
       - ./extra_nodes/:/opt/ai-dock/bin/extra_nodes/:ro
 
       # Mount models (optional)
-      #- ${MODEL_BASE_PATH}/Stable-diffusion:/opt/storage/stable_diffusion/models/ckpt:ro
-      #- ${MODEL_BASE_PATH}/CLIP:/opt/storage/stable_diffusion/models/clip:ro
-      #- ${MODEL_BASE_PATH}/clip_vision:/opt/storage/stable_diffusion/models/clip_vision:ro
-      #- ${MODEL_BASE_PATH}/ControlNet:/opt/storage/stable_diffusion/models/controlnet:ro
-      #- ${MODEL_BASE_PATH}/embeddings:/opt/storage/stable_diffusion/models/embeddings:ro
-      #- ${MODEL_BASE_PATH}/facerestore_models:/opt/storage/stable_diffusion/models/facerestore:ro
-      #- ${MODEL_BASE_PATH}/ESRGAN:/opt/storage/stable_diffusion/models/esrgan:ro
-      #- ${MODEL_BASE_PATH}/Lora:/opt/storage/stable_diffusion/models/lora:ro
-      #- ${MODEL_BASE_PATH}/unet:/opt/storage/stable_diffusion/models/unet:ro
-      #- ${MODEL_BASE_PATH}/VAE:/opt/storage/stable_diffusion/models/vae:ro
-      #- ${MODEL_BASE_PATH}/stablesr:/opt/storage/stable_diffusion/models/stablesr:ro
-      #- ${MODEL_BASE_PATH}/comfy3dpack:/opt/storage/stable_diffusion/models/comfy3dpack:ro           
+      - ${MODEL_BASE_PATH}/Stable-diffusion:/opt/storage/stable_diffusion/models/ckpt:ro
+      - ${MODEL_BASE_PATH}/CLIP:/opt/storage/stable_diffusion/models/clip:ro
+      - ${MODEL_BASE_PATH}/clip_vision:/opt/storage/stable_diffusion/models/clip_vision:ro
+      - ${MODEL_BASE_PATH}/ControlNet:/opt/storage/stable_diffusion/models/controlnet:ro
+      - ${MODEL_BASE_PATH}/embeddings:/opt/storage/stable_diffusion/models/embeddings:ro
+      - ${MODEL_BASE_PATH}/facerestore_models:/opt/storage/stable_diffusion/models/facerestore:ro
+      - ${MODEL_BASE_PATH}/ESRGAN:/opt/storage/stable_diffusion/models/esrgan:ro
+      - ${MODEL_BASE_PATH}/Lora:/opt/storage/stable_diffusion/models/lora:ro
+      - ${MODEL_BASE_PATH}/unet:/opt/storage/stable_diffusion/models/unet:ro
+      - ${MODEL_BASE_PATH}/VAE:/opt/storage/stable_diffusion/models/vae:ro
+      - ${MODEL_BASE_PATH}/stablesr:/opt/storage/stable_diffusion/models/stablesr:ro
+      - ${MODEL_BASE_PATH}/comfy3dpack:/opt/storage/stable_diffusion/models/comfy3dpack:ro
+      - ${MODEL_BASE_PATH}/clip_interrogator:/opt/storage/stable_diffusion/models/clip_interrogator:ro
+      - ${MODEL_BASE_PATH}/prompt_generator:/opt/storage/stable_diffusion/models/prompt_generator:ro
+      - ${MODEL_BASE_PATH}/ipadapter:/opt/storage/stable_diffusion/models/ipadapter:ro
+      - ${MODEL_BASE_PATH}/hypernetworks:/opt/storage/stable_diffusion/models/hypernetworks:ro
+      - ${MODEL_BASE_PATH}/lama:/opt/storage/stable_diffusion/models/lama:ro
+      - ${MODEL_BASE_PATH}/clipseg:/opt/storage/stable_diffusion/models/clipseg:ro
+      - ${MODEL_BASE_PATH}/sams:/opt/storage/stable_diffusion/models/sam:ro
+      - ${MODEL_BASE_PATH}/sam2:/opt/storage/stable_diffusion/models/sam2:ro
+      - ${MODEL_BASE_PATH}/vae_approx:/opt/storage/stable_diffusion/models/VAE-approx:ro
+      - ${MODEL_BASE_PATH}/configs:/opt/storage/stable_diffusion/models/configs:ro
+      - ${MODEL_BASE_PATH}/diffusers:/opt/storage/stable_diffusion/models/diffusers:ro
+      - ${MODEL_BASE_PATH}/facedetection:/opt/storage/stable_diffusion/models/facedetection:ro
+      - ${MODEL_BASE_PATH}/gligen:/opt/storage/stable_diffusion/models/gligen:ro
+      - ${MODEL_BASE_PATH}/insightface:/opt/storage/stable_diffusion/models/insightface:ro
+      - ${MODEL_BASE_PATH}/mmdets:/opt/storage/stable_diffusion/models/mmdets:ro
+      - ${MODEL_BASE_PATH}/onnx:/opt/storage/stable_diffusion/models/onnx:ro
+      - ${MODEL_BASE_PATH}/photomaker:/opt/storage/stable_diffusion/models/photomaker:ro
+      - ${MODEL_BASE_PATH}/reactor:/opt/storage/stable_diffusion/models/reactor:ro
+      - ${MODEL_BASE_PATH}/style_models:/opt/storage/stable_diffusion/models/style_models:ro
+      - ${MODEL_BASE_PATH}/ultralytics:/opt/storage/stable_diffusion/models/ultralytics:ro
+      - ${MODEL_BASE_PATH}/echo_mimic:/opt/storage/stable_diffusion/models/echo_mimic:ro
+      - ${MODEL_BASE_PATH}/hallo:/opt/storage/stable_diffusion/models/hallo:ro
+      - ${MODEL_BASE_PATH}/instantid:/opt/storage/stable_diffusion/models/instantid:ro
+      - ${MODEL_BASE_PATH}/layer_model:/opt/storage/stable_diffusion/models/layer_model:ro
+      - ${MODEL_BASE_PATH}/live_portrait:/opt/storage/stable_diffusion/models/liveportrait:ro
+      - ${MODEL_BASE_PATH}/LLM:/opt/storage/stable_diffusion/models/LLM:ro
+      - ${MODEL_BASE_PATH}/svd:/opt/storage/stable_diffusion/models/svd:ro
+      - ${MODEL_BASE_PATH}/animatediff_models:/opt/storage/stable_diffusion/models/animatediff_models:ro
+      - ${MODEL_BASE_PATH}/animatediff_motion_lora:/opt/storage/stable_diffusion/models/animatediff_motion_lora:ro
+      - ${MODEL_BASE_PATH}/BiRefNet:/opt/storage/stable_diffusion/models/BiRefNet:ro
+
     ports:
         # SSH available on host machine port 2222 to avoid conflict. Change to suit
         - ${SSH_PORT_HOST:-2222}:22
